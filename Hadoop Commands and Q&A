@@ -1,0 +1,20 @@
+Hadoop Interesting 
+Small Files problems in Hadoop ?
+
+
+Run Jar:
+hadoop jar  (jar file name) (className_along_with_packageName) (input file) (output folderpath)
+
+Run1
+hadoop jar wordCount.jar com.hadoop.mr.learn.WC_Runner /tmp/sharan/wordCount.txt /tmp/sharan/output1
+
+Run3
+hadoop jar WC_Runner1.jar com.hadoop.learn.mr.WC_Runner /tmp/sharan/wordCount.txt /tmp/sharan/output3
+
+List files
+----------
+hadoop fs -ls /tmp/sharan/output3
+
+Read data from HDFS and show on the screen
+---------------------------------------------
+hadoop fs -cat /tmp/sharan/output3/part-r-00000
