@@ -33,13 +33,13 @@ public class MultipleOutputs_Reducer extends Reducer<Text, Text, Text, Text> {
 			name = mapValueRecord[0]; // name = Arthur
 			dept = mapValueRecord[1]; // dept = HR
 			totalSalary += Integer.parseInt(mapValueRecord[2]); // totalSalary = 19791
-
-			/* output employee salary to department file */
+		}
+		/* output employee salary to department file */
 			if (dept.equalsIgnoreCase("HR")) {
 				out.write("HR", key, new Text(name + "," + totalSalary));
-			} else if (dept.equalsIgnoreCase("Accounts"))
+			} else if (dept.equalsIgnoreCase("Accounts")){
 				out.write("Accounts", key, new Text(name + "," + totalSalary));
-		}
+			}
 
 	}
 
