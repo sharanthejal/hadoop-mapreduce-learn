@@ -11,6 +11,48 @@ hadoop jar wordCount.jar com.hadoop.mr.learn.WC_Runner /tmp/sharan/wordCount.txt
 Run3
 hadoop jar WC_Runner1.jar com.hadoop.learn.mr.WC_Runner /tmp/sharan/wordCount.txt /tmp/sharan/output3
 
+Run4 
+hadoop jar WC_Runner3.jar com.hadoop.learn.mr.WC_Runner /tmp/sharan/wordCount.txt /tmp/sharan/output4
+
+Run5:
+hadoop jar evenodd.jar com.hadoop.learn.mr.evenodd.EvenOddCount_Driver /tmp/sharan/evenodd.txt /tmp/sharan/output5
+
+Run6:
+hadoop jar Facebook_ads.jar com.hadoop.learn.mr.fb.Facebook_Driver /tmp/sharan/facebook_data /tmp/sharan/output6
+
+Run7:
+hadoop jar custom_writable_wc.jar com.hadoop.learn.mr.customwritables.WC_RunnerCustomWritable /tmp/sharan/wordCount.txt /tmp/sharan/output7
+
+Run7:
+hadoop jar customwritable_fraud_detection.jar com.hadoop.learn.mr.frauddetection.FraudDetection_Driver /tmp/sharan/fraudData /tmp/sharan/output8
+
+Run8: MultipleInputs:
+-----------------------
+hadoop jar multiple_inputs.jar com.hadoop.learn.mr.multipleinputs.MultipleInputs_Driver /tmp/sharan/MultipleInputs_TextData /tmp/sharan/MultipleInputs_KVData /tmp/sharan/output10
+
+Run9:
+hadoop jar distributed_cache.jar com.hadoop.learn.mr.distributedcache.DistributedCache_Driver /tmp/sharan/distributed_cache_empData /tmp/sharan/output12 hdfs://quickstart.cloudera:8020/tmp/sharan/designation.txt
+
+Run10: MultipleOutputs:
+-----------------------
+hadoop jar multiple_outputs.jar com.hadoop.learn.mr.multipleoutputs.MultipleOutputs_Driver /tmp/sharan/multipleOutput_Data /tmp/sharan/output14
+
+[cloudera@quickstart Downloads]$ hadoop fs -ls /tmp/sharan/output14
+Found 4 items
+-rw-r--r--   1 cloudera supergroup       5238 2020-01-28 05:14 /tmp/sharan/output14/Accounts-r-00000
+-rw-r--r--   1 cloudera supergroup       5067 2020-01-28 05:14 /tmp/sharan/output14/HR-r-00000
+-rw-r--r--   1 cloudera supergroup          0 2020-01-28 05:14 /tmp/sharan/output14/_SUCCESS
+-rw-r--r--   1 cloudera supergroup          0 2020-01-28 05:14 /tmp/sharan/output14/part-r-00000
+
+
+Run9: Inner Join:
+-----------------------
+hadoop jar Inner_Join.jar com.hadoop.learn.mr.joins.inner.InnerJoin_Driver /tmp/sharan/InnerJoin_EmpData /tmp/sharan/InnerJoin_AddressData /tmp/sharan/output15
+
+Run9: Outer Join:
+-----------------------
+hadoop jar Outer_Join.jar com.hadoop.learn.mr.joins.outer.OuterJoin_Driver /tmp/sharan/OuterJoinEmp_Data /tmp/sharan/OuterJoinDept_Data /tmp/sharan/output16
+
 List files
 ----------
 hadoop fs -ls /tmp/sharan/output3
@@ -18,3 +60,36 @@ hadoop fs -ls /tmp/sharan/output3
 Read data from HDFS and show on the screen
 ---------------------------------------------
 hadoop fs -cat /tmp/sharan/output3/part-r-00000
+
+Delete data from HDFS
+----------------------
+hadoop fs -rm -r /tmp/sharan/output3
+
+Put Data
+---------
+hadoop fs -put facebook_data /tmp/sharan/facebook_data
+
+Alternative for put command and it is case-sensitive
+-----------------------------------------------------
+[cloudera@quickstart Downloads]$ hadoop fs -copyFromLocal MultipleInputs_TextData /tmp/sharan/MultipleInputs_TextData
+[cloudera@quickstart Downloads]$ hadoop fs -cat /tmp/sharan/MultipleInputs_TextData
+
+Distributed Cache:
+------------------
+By default, the size of distributed cache in Hadoop is 10GB.
+
+Input Split Computation:
+------------------------
+Input Split Size = Max(minimum Size, Min(maximum size, block size))
+
+default values:
+----------------
+minimum split size: 1 mb
+maximum split size: 9223372036854775807 MB
+block size : 128 mb
+
+Above values are configurable.
+
+---------------------------------------------------------------------------------------------------------
+hdfs://quickstart.cloudera:8020/tmp/sharan/output12
+
