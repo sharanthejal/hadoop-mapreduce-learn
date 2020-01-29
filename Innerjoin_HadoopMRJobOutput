@@ -1,0 +1,13 @@
+
+[cloudera@quickstart Downloads]$ hadoop fs -ls /tmp/sharan/output15
+Found 2 items
+-rw-r--r--   1 cloudera supergroup          0 2020-01-29 03:01 /tmp/sharan/output15/_SUCCESS
+-rw-r--r--   1 cloudera supergroup        101 2020-01-29 03:01 /tmp/sharan/output15/part-r-00000
+
+[cloudera@quickstart Downloads]$ hadoop fs -cat /tmp/sharan/output15/part-r-00000
+1	Jack,Paris
+2	Daniel,London
+3	Locieko,Melbourne
+4	Johine,India
+4	Johine,Australia
+5	Michaiel,Kuwait
