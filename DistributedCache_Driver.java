@@ -1,10 +1,13 @@
 package com.hadoop.learn.mr.distributedcache;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -12,13 +15,14 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
-import com.sun.jersey.core.impl.provider.entity.XMLJAXBElementProvider.Text;
 
 public class DistributedCache_Driver {
 
-	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException, URISyntaxException {
 
 		Configuration conf = new Configuration();
+		// add files to cache 
+		//DistributedCache.addCacheFile(new URI("hdfs://localhost:9000/user/jivesh/designation.txt"), conf);
 		String files[] = new GenericOptionsParser(conf, args).getRemainingArgs();
 
 		Path inputPath = new Path(files[0]);
@@ -27,7 +31,15 @@ public class DistributedCache_Driver {
 		// Create Job Instance with job name
 		Job job = Job.getInstance(conf, "DistributedCacheForSmallFiles");
 		job.setJarByClass(DistributedCache_Driver.class);
-
+		
+		//job.addCacheFile(new URI("hdfs:///localhost:8020/tmp/sharan/designation.txt"));
+		job.addCacheFile(new URI("hdfs://quickstart.cloudera:8020/tmp/sharan/designation.txt"));
+		
+		
+		//Set Mapper and Reducer classes
+		job.setMapperClass(DistributedCache_MapperNew.class);
+		job.setReducerClass(DistributedCache_Reducer.class);
+		
 		// Set Mapoutput key and value classes and Reducers also
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(DoubleWritable.class);
