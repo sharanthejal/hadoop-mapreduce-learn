@@ -33,6 +33,13 @@ hadoop jar multiple_inputs.jar com.hadoop.learn.mr.multipleinputs.MultipleInputs
 Run9:
 hadoop jar distributed_cache.jar com.hadoop.learn.mr.distributedcache.DistributedCache_Driver /tmp/sharan/distributed_cache_empData /tmp/sharan/output12 hdfs://quickstart.cloudera:8020/tmp/sharan/designation.txt
 
+working for local file after creating local folder and data:
+--------------------------------------------------------------
+hadoop jar distributedcache1.jar com.hadoop.learn.mr.distributedcache.DistributedCache_Driver /tmp/sharan/distributed_cache_empData /tmp/sharan/output12
+
+For hadoop folder
+hadoop jar distributedcache3.jar com.hadoop.learn.mr.distributedcache.DistributedCache_Driver /tmp/sharan/distributed_cache_empData /tmp/sharan/output18
+
 Run10: MultipleOutputs:
 -----------------------
 hadoop jar multiple_outputs.jar com.hadoop.learn.mr.multipleoutputs.MultipleOutputs_Driver /tmp/sharan/multipleOutput_Data /tmp/sharan/output14
@@ -52,6 +59,14 @@ hadoop jar Inner_Join.jar com.hadoop.learn.mr.joins.inner.InnerJoin_Driver /tmp/
 Run9: Outer Join:
 -----------------------
 hadoop jar Outer_Join.jar com.hadoop.learn.mr.joins.outer.OuterJoin_Driver /tmp/sharan/OuterJoinEmp_Data /tmp/sharan/OuterJoinDept_Data /tmp/sharan/output16
+
+Run9: CustomCounters:
+-----------------------
+hadoop jar customCounters.jar com.hadoop.learn.mr.counters.CountersDriver 
+
+Run 15: :
+-----------------------
+hadoop jar customRecordReader.jar com.hadoop.learn.mr.custominputandrecordreader.XMLDriver 
 
 List files
 ----------
